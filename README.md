@@ -1,4 +1,83 @@
-# Vanish — Come funziona
+🇬🇧 # Vanish — How It Works
+
+## Introduction
+
+**Vanish** is a lightweight Windows utility that performs, with a single click, a series of _anti-forensics_ and _privacy-cleanup_ operations. In short, it:
+
+* **Cleans** system logs, caches, temporary files, history entries, and events that could reveal user activity;  
+* **Noises** the disk and registry by re-injecting random traces to mask deletions;  
+* **Manipulates timestamps**: it rolls the clock back, performs its operations, then restores the original time so newly created artefacts carry inconsistent dates;  
+* Presents everything through a **minimal GUI** with two buttons (*Start* and *Exit*) and a progress bar that shows the overall progress.
+
+> ⚠️  This project is for research and educational purposes **only**.  
+> Running Vanish on systems you don’t own **without explicit consent** may violate laws or ethical guidelines.
+
+---
+
+## 1 · Startup & GUI
+
+| Phase          | Details                                                                                                                         |
+|----------------|---------------------------------------------------------------------------------------------------------------------------------|
+| **wWinMain**   | Registers the window class, creates a **frameless, semi-transparent window** (`WS_POPUP` + layered) sized 350 × 450 px, then centers it. |
+| **Painting**   | Inside `WM_PAINT` it draws a **vertical grey→black gradient** and two hand-drawn **custom buttons** (`Start`, `Exit`) using **AlphaBlend**. |
+| **Hit-test**   | In `WM_NCHITTEST` the code decides whether the cursor is over a button (`HTCLIENT`) or elsewhere (window drag).                 |
+| **Hover**      | In `WM_MOUSEMOVE` the `hover` flags of the buttons are updated to change color on rollover.                                     |
+| **Actions**    | `Start` → launches the cleanup sequence; `Exit` → `PostQuitMessage(0)`.                                                         |
+
+> **UI note:** the buttons are GDI sprites, not real BUTTON controls; no *.rc resources are required.
+
+---
+
+## 2 · “Start” Sequence (clean & evasion)
+
+The progress bar (`PBS_SMOOTH`) is created in `ShowProgressBar()` and updated in 10-percent steps. Below is the step plan taken directly from `SS.cpp`:
+
+| Step | Percent | Functions called                                                     | What they do                                                                                                                                                                          |
+|------|---------|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1️⃣  | **10 %** | `changeSystemTime`                                                   | Saves the current date/time → sets a _random timestamp_ (2015–today).                                                                                                                 |
+| 2️⃣  | **20 %** | `discordcache`, `cleandns`, `windef`                                 | Kills Discord, purges its cache & local storage; flushes DNS; deletes Windows Defender logs.                                                                                           |
+| 3️⃣  | **40 %** | `cleanevtx`, `cleanregedit`, `cleancron`, `amcache`                  | Cleans Event Logs (System/Application/Security), Explorer MRU, browser history; schedules replacement of **Amcache.hve**.                                                             |
+| 4️⃣  | **60 %** | `cleanhistory`, `cleanvarious`, `DPSClean`, `RestartSvc`, `CleanMemory` | Removes PowerShell & RecentDocs history, crash dumps, empties %Temp%; stops telemetry services (DPS, DiagTrack) then restarts them; wipes 100 MB of RAM.                              |
+| 5️⃣  | **70 %** | `Journal`, `filestemp`, `Shadows`, `DeleteBam`, `Prefetch`           | Resets the USN Journal, creates/deletes 30 random `.tmp` files, deletes all **Shadow Copies** and the contents of `C:\\Windows\\Prefetch`, clears the **BAM** registry key.           |
+| 6️⃣  | **80 %** | —                                                                    | (buffer — no extra functions; just advances the percentage).                                                                                                                          |
+| 7️⃣  | **90 %** | `rsttime`                                                            | Restores the original date/time saved at step 1️⃣.                                                                                                                                    |
+| 8️⃣  | **100 %**| `POPJournal`, `Events`, `security`                                   | Re-populates the USN Journal and Temp with random files, **overwrites** the Event Logs with 10 000 “plausible” entries, spawns 10 000 minimized `taskhostw.exe` processes as noise.   |
+| —    | **End** | `HideProgressBar`, `PostQuitMessage(0)`                               | Hides the bar → application terminates.                                                                                                                                               |
+
+> **Why this order?**  
+> • The clock is skewed **before** generating artefacts → timestamps become inconsistent.  
+> • Data is first wiped, then overwritten with random “noise”.  
+> • The clock is restored **after** cleanup to avoid obvious traces.
+
+---
+
+## 3 · Key Files
+
+| File         | Role                                               | Note |
+|--------------|----------------------------------------------------|------|
+| `SS.cpp`     | Entry point + GUI + orchestration of all steps.    | |
+| `funzioni.h` | Toolbox with ~40 cleanup, spoofing, and noise routines for logs/registry/disk. | |
+| `classi.h`   | `menu` struct, `WriteCallBack` for potential HTTP requests (currently unused in `SS.cpp`). | |
+
+---
+
+## 4 · Requirements
+
+| Item            | Why?                                                                                                                   |
+|-----------------|------------------------------------------------------------------------------------------------------------------------|
+| **PowerShell 7**| Used for multi-threading and scripted tasks.                                                                           |
+| **Privileges**  | The cleaner modifies registry keys under `HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\bam\\State\\UserSettings\\…`; run elevated. |
+
+---
+
+## 5 · Quick Build
+
+```bash
+vcpkg install --triplet x64-windows
+cl /std:c++17 /EHsc SS.cpp user32.lib gdi32.lib comctl32.lib msimg32.lib dwmapi.lib
+```
+
+🇮🇹 # Vanish — Come funziona
 
 ## Introduzione
 
@@ -75,3 +154,4 @@ La progress-bar (`PBS_SMOOTH`) nasce in `ShowProgressBar()` e viene aggiornata i
 ```bash
 vcpkg install --triplet x64-windows
 cl /std:c++17 /EHsc SS.cpp user32.lib gdi32.lib comctl32.lib msimg32.lib dwmapi.lib
+```
