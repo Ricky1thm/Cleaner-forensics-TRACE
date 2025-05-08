@@ -1,0 +1,61 @@
+﻿  SS.cpp
+C:\Users\ricca\Documents\SS\funzioni.h(53,12): warning C4244: 'argomento': conversione da 'time_t' a 'unsigned int'. Possibile perdita di dati.
+  (compilazione del file di origine 'SS.cpp')
+  
+C:\Users\ricca\Documents\SS\funzioni.h(299,57): warning C4267: 'argomento': conversione da 'size_t' a '_Ty'. Possibile perdita di dati.
+C:\Users\ricca\Documents\SS\funzioni.h(299,57): warning C4267:         with
+C:\Users\ricca\Documents\SS\funzioni.h(299,57): warning C4267:         [
+C:\Users\ricca\Documents\SS\funzioni.h(299,57): warning C4267:             _Ty=int
+C:\Users\ricca\Documents\SS\funzioni.h(299,57): warning C4267:         ]
+  (compilazione del file di origine 'SS.cpp')
+  
+C:\Users\ricca\Documents\SS\funzioni.h(358,68): warning C4267: 'argomento': conversione da 'size_t' a '_Ty'. Possibile perdita di dati.
+C:\Users\ricca\Documents\SS\funzioni.h(358,68): warning C4267:         with
+C:\Users\ricca\Documents\SS\funzioni.h(358,68): warning C4267:         [
+C:\Users\ricca\Documents\SS\funzioni.h(358,68): warning C4267:             _Ty=int
+C:\Users\ricca\Documents\SS\funzioni.h(358,68): warning C4267:         ]
+  (compilazione del file di origine 'SS.cpp')
+  
+C:\Users\ricca\Documents\SS\funzioni.h(407,3): warning C4566: un carattere rappresentato dal nome di caratteri universali '\u2705' non può essere rappresentato nella tabella codici corrente (1252)
+  (compilazione del file di origine 'SS.cpp')
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(4710,18): warning C4244: '=': conversione da 'wchar_t' a 'char'. Possibile perdita di dati.
+  (compilazione del file di origine 'SS.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(4710,18):
+      il contesto di creazione dell'istanza del modello (prima il meno recente) è
+          C:\Users\ricca\Documents\SS\SS.cpp(320,33):
+          vedere il riferimento all'istanza 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)' della funzione modello di cui è in corso la compilazione
+          with
+          [
+              _Elem=wchar_t,
+              _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>,
+              _Alloc=std::allocator<char>
+          ]
+              C:\Users\ricca\Documents\SS\SS.cpp(320,33):
+              vedere il primo riferimento a 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string' in 'WindowProc'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xstring(793,17):
+          vedere il riferimento all'istanza 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct_from_iter<wchar_t*,wchar_t*,_Size_type>(_Iter,const _Sent,_Size)' della funzione modello di cui è in corso la compilazione
+          with
+          [
+              _Size_type=unsigned __int64,
+              _Iter=wchar_t *,
+              _Sent=wchar_t *,
+              _Size=unsigned __int64
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xstring(949,18):
+          vedere il riferimento all'istanza '_OutIt *std::_Copy_n_unchecked4<wchar_t*,_Size,char*>(_InIt,_SizeTy,_OutIt)' della funzione modello di cui è in corso la compilazione
+          with
+          [
+              _OutIt=char *,
+              _Size=unsigned __int64,
+              _InIt=wchar_t *,
+              _SizeTy=unsigned __int64
+          ]
+  
+  Generazione codice in corso...
+  Previous IPDB not found, fall back to full compilation.
+C:\Users\ricca\Documents\SS\funzioni.h(116): warning C4715: 'rsttime': non tutti i percorsi di controllo restituiscono un valore
+C:\Users\ricca\Documents\SS\funzioni.h(91): warning C4715: 'changeSystemTime': non tutti i percorsi di controllo restituiscono un valore
+  All 2074 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Generazione codice terminata
+  SS.vcxproj -> C:\Users\ricca\Documents\SS\x64\Release\SS.exe
