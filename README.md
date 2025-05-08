@@ -1,4 +1,4 @@
-🇬🇧 # Vanish — How It Works 🚀
+# Vanish — How It Works 🚀
 
 ## Introduction 🔰
 
@@ -76,8 +76,7 @@ The progress bar (`PBS_SMOOTH`) is created in `ShowProgressBar()` and updated in
 vcpkg install --triplet x64-windows
 cl /std:c++17 /EHsc SS.cpp user32.lib gdi32.lib comctl32.lib msimg32.lib dwmapi.lib
 ```
-
-🇮🇹 # Vanish — Come funziona 🚀
+# Vanish — Come funziona 🚀
 
 ## Introduzione 🔰
 
