@@ -63,10 +63,10 @@ La progress-bar (`PBS_SMOOTH`) nasce in `ShowProgressBar()` e viene aggiornata i
 
 ## 4 · Requisiti
 
-| File          | Ruolo                                                         | Nota |
-|---------------|--------------------------------------------------------------|------|
-| `Powershell 7`| per un avere l'utilizzo del multi-threading.  | |
-| `Privilegi`   | il Cleaner cambia delle regedit riguardanti la bam impostate i privilegi su HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bam\State\UserSettings\S-1-5-21-4006182184-4220401772-2549539988-1001 | |
+| Cosa          | Perchè?                                                      |
+|---------------|--------------------------------------------------------------|
+| `Powershell 7`| per un avere l'utilizzo del multi-threading. |
+| `Privilegi`   | il Cleaner cambia delle regedit riguardanti la bam impostate i privilegi su HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bam\State\UserSettings\S-1-5-21-4006182184-4220401772-2549539988-1001 |
 
 ---
 
