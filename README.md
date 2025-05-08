@@ -1,6 +1,4 @@
-# Cleaner-forensics-TRACE
-
-# Vanish — Come funziona, passo per passo
+# Vanish — Come funziona
 
 ## Introduzione
 
@@ -13,12 +11,6 @@
 
 > ⚠️  L’obiettivo è puramente didattico/di ricerca.  
 > Usare Vanish su macchine di terzi **senza consenso** può costituire violazione di legge.
-
----
-
-### Scopo di questo documento
-
-Spiegare **passo per passo** che cosa succede dietro le quinte quando l’utente avvia Vanish, così che chi legge la repository possa capire (e verificare) la logica del programma.
 
 ---
 
@@ -69,7 +61,16 @@ La progress-bar (`PBS_SMOOTH`) nasce in `ShowProgressBar()` e viene aggiornata i
 
 ---
 
-## 4 · Compilazione rapida
+## 4 · Requisiti
+
+| File          | Ruolo                                                         | Nota |
+|---------------|--------------------------------------------------------------|------|
+| `Powershell 7`| per un avere l'utilizzo del multi-threading.  | |
+| `Privilegi`   | il Cleaner cambia delle regedit riguardanti la bam impostate i privilegi su HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bam\State\UserSettings\S-1-5-21-4006182184-4220401772-2549539988-1001 | |
+
+---
+
+## 5 · Compilazione rapida
 
 ```bash
 vcpkg install --triplet x64-windows
